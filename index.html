@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Wasan DOS Gateway - Secure Enterprise Portal v1.3</title>
+ <title>Wasan DOS Gateway - Secure Enterprise Portal v1.3.1</title>
  <style>
  :root {
  --dos-bg: #000000;
@@ -124,7 +124,7 @@
  margin: 5px 0;
  z-index: 20;
  position: relative;
- max-height: 42vh;
+ max-height: 40vh;
  overflow-y: auto;
  padding: 2px;
  }
@@ -248,7 +248,7 @@
  <div class="dos-terminal">
  <div>
  <header>
- <h1>[ WASAN_SECURE_GATEWAY_v1.3 ]</h1>
+ <h1>[ WASAN_SECURE_GATEWAY_v1.3.1 ]</h1>
  <p>Enterprise Resource Planning Access Portal</p>
  </header>
 
@@ -264,41 +264,41 @@
 
  <!-- قائمة الأزرار والروابط المنضبطة -->
  <div class="actions-container" id="buttonsList">
- <div class="action-group" data-name="main login login">
+ <div class="action-group" data-name="main login login 1">
  <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" target="_blank" class="dos-btn">
  [ 1. MAIN LOGIN ]
  </a>
  </div>
 
- <div class="action-group" data-name="query inquiry 23404">
+ <div class="action-group" data-name="query inquiry 23404 2">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404" target="_blank" class="dos-btn btn-query">
  [ 2. QUERY / INQUIRY ]
  </a>
  <div class="url-display">ID: 23404</div>
  </div>
 
- <div class="action-group" data-name="personal profile 51648">
+ <div class="action-group" data-name="personal profile 51648 3">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648" target="_blank" class="dos-btn btn-profile">
  [ 3. PERSONAL PROFILE ]
  </a>
  <div class="url-display">ID: 51648</div>
  </div>
 
- <div class="action-group" data-name="historical record history 23279">
+ <div class="action-group" data-name="historical record history 23279 4">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279" target="_blank" class="dos-btn btn-history">
  [ 4. HISTORICAL RECORD ]
  </a>
  <div class="url-display">ID: 23279</div>
  </div>
 
- <div class="action-group" data-name="leaves vacations 47564">
+ <div class="action-group" data-name="leaves vacations 47564 5">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564" target="_blank" class="dos-btn btn-leaves">
  [ 5. LEAVES & VACATIONS ]
  </a>
  <div class="url-display">ID: 47564</div>
  </div>
 
- <div class="action-group" data-name="salary certificate 48913">
+ <div class="action-group" data-name="salary certificate 48913 6">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913" target="_blank" class="dos-btn btn-salary">
  [ 6. SALARY CERTIFICATE ]
  </a>
@@ -310,7 +310,7 @@
  <div class="cli-container">
  <div class="cli-prompt-line">
  <span class="cli-symbol">C:\Wasan></span>
- <input type="text" id="cliInput" class="cli-input" placeholder="Type 1-6 or 'help' and press Enter..." onkeydown="handleCLI(event)">
+ <input type="text" id="cliInput" class="cli-input" placeholder="Type 1-6 or 'help' and press Enter..." autocomplete="off">
  </div>
  </div>
  </div>
@@ -345,10 +345,10 @@
  }
  }
 
- // سطر الأوامر التفاعلي CLI
- function handleCLI(event) {
+ // معالجة سطر الأوامر السفلي بشكل برمجي دقيق ومباشر document.getElementById('cliInput').addEventListener('keydown', function(event) {
  if (event.key === 'Enter') {
- let val = document.getElementById('cliInput').value.trim().toLowerCase();
+ event.preventDefault();
+ let val = this.value.trim().toLowerCase();
  let links = [
  "https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp",
  "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404",
@@ -362,15 +362,15 @@
  if (index >= 0 && index < links.length) {
  window.open(links[index], '_blank');
  } else if (val === 'help') {
- alert("Commands:\n1: Main Login\n2: Query\n3: Profile\n4: History\n5: Leaves\n6: Salary");
+ alert("Wasan DOS Gateway Commands:\n[1] Main Login\n[2] Query / Inquiry\n[3] Personal Profile\n[4] Historical Record\n[5] Leaves & Vacations\n[6] Salary Certificate");
  } else if (val === 'clear') {
- document.getElementById('cliInput').value = '';
+ this.value = '';
  } else {
- alert("Invalid command! Type numbers 1 to 6 or 'help'.");
+ alert("Unknown command! Type a number from 1 to 6 or 'help'.");
  }
- document.getElementById('cliInput').value = '';
+ this.value = '';
  }
- }
+ });
  </script>
 </body>
 </html>
