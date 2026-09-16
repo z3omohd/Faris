@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Wasan DOS Gateway - Secure Enterprise Portal</title>
+ <title>Wasan DOS Gateway - Secure Enterprise Portal v1.3</title>
  <style>
  :root {
  --dos-bg: #000000;
@@ -37,7 +37,7 @@
  width: 100%;
  border: 2px solid var(--dos-border);
  background-color: #050505;
- padding: 20px 15px;
+ padding: 15px;
  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
  position: relative;
  border-radius: 4px;
@@ -60,45 +60,74 @@
 
  header {
  text-align: center;
- margin-bottom: 18px;
+ margin-bottom: 12px;
  border-bottom: 1px dashed var(--dos-dim-green);
- padding-bottom: 10px;
+ padding-bottom: 8px;
  }
 
  header h1 {
- font-size: 1.05rem;
+ font-size: 1rem;
  color: var(--dos-amber);
- margin-bottom: 4px;
+ margin-bottom: 3px;
  text-transform: uppercase;
  letter-spacing: 1px;
  }
 
  header p {
- font-size: 0.75rem;
+ font-size: 0.7rem;
  color: var(--dos-green);
  }
 
  .system-info {
- font-size: 0.7rem;
+ font-size: 0.65rem;
  color: var(--dos-dim-green);
- margin-bottom: 15px;
- line-height: 1.5;
+ margin-bottom: 10px;
+ line-height: 1.4;
+ display: flex;
+ justify-content: space-between;
+ border-bottom: 1px dashed #111;
+ padding-bottom: 6px;
  }
 
  .system-info span {
  color: var(--dos-green);
  }
 
- /* حاوية الأزرار مع ضمان توحيد عرض العناصر بالكامل */ .actions-container {
- display: flex;
- flex-direction: column;
- gap: 14px;
- margin: 10px 0;
+ /* شريط البحث السريع */
+ .search-box-container {
+ margin-bottom: 10px;
  z-index: 20;
  position: relative;
- max-height: 52vh;
+ }
+
+ .dos-search {
+ width: 100%;
+ background-color: #000;
+ border: 1px solid var(--dos-dim-green);
+ color: var(--dos-green);
+ padding: 8px 10px;
+ font-family: "Courier New", Courier, monospace;
+ font-size: 0.8rem;
+ outline: none;
+ border-radius: 2px;
+ }
+
+ .dos-search:focus {
+ border-color: var(--dos-green);
+ box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+ }
+
+ /* قائمة الأزرار مع التمرير */
+ .actions-container {
+ display: flex;
+ flex-direction: column;
+ gap: 10px;
+ margin: 5px 0;
+ z-index: 20;
+ position: relative;
+ max-height: 40vh;
  overflow-y: auto;
- padding: 4px;
+ padding: 2px;
  }
 
  .action-group {
@@ -112,15 +141,15 @@
  background-color: var(--dos-bg);
  color: var(--dos-green);
  border: 2px solid var(--dos-green);
- padding: 12px 15px;
- font-size: 0.9rem;
+ padding: 10px 12px;
+ font-size: 0.85rem;
  font-weight: bold;
  font-family: "Courier New", Courier, monospace;
  cursor: pointer;
  text-decoration: none;
  text-transform: uppercase;
  letter-spacing: 0.5px;
- box-shadow: 0 0 8px rgba(0, 255, 0, 0.15);
+ box-shadow: 0 0 6px rgba(0, 255, 0, 0.15);
  transition: all 0.2s ease-in-out;
  width: 100%;
  display: block;
@@ -133,10 +162,10 @@
  .dos-btn:hover {
  background-color: var(--dos-green);
  color: var(--dos-bg);
- box-shadow: 0 0 15px var(--dos-green);
+ box-shadow: 0 0 12px var(--dos-green);
  }
 
- /* تخصيص ألوان الأزرار المتباينة بنسق هندسي ثابت */ .btn-query { color: var(--dos-amber); border-color: var(--dos-amber); }
+ /* تخصيص ألوان الأزرار المتباينة */ .btn-query { color: var(--dos-amber); border-color: var(--dos-amber); }
  .btn-query:hover { background-color: var(--dos-amber); color: var(--dos-bg); }
 
  .btn-profile { color: var(--dos-cyan); border-color: var(--dos-cyan); }
@@ -152,20 +181,55 @@
  .btn-salary:hover { background-color: #ffff00; color: var(--dos-bg); }
 
  .url-display {
- font-size: 0.65rem;
+ font-size: 0.6rem;
  color: var(--dos-dim-green);
- margin-top: 4px;
+ margin-top: 2px;
  text-align: center;
  width: 100%;
  }
 
- /* تذييل الصفحة */
- footer {
- margin-top: 15px;
+ /* سطر الأوامر التفاعلي CLI */
+ .cli-container {
+ margin-top: 10px;
  border-top: 1px dashed var(--dos-dim-green);
  padding-top: 8px;
+ z-index: 20;
+ position: relative;
+ }
+
+ .cli-prompt-line {
+ display: flex;
+ align-items: center;
+ font-size: 0.75rem;
+ background: #000;
+ border: 1px solid var(--dos-dim-green);
+ padding: 5px 8px;
+ border-radius: 2px;
+ }
+
+ .cli-symbol {
+ color: var(--dos-amber);
+ margin-right: 6px;
+ font-weight: bold;
+ }
+
+ .cli-input {
+ background: transparent;
+ border: none;
+ color: var(--dos-green);
+ font-family: "Courier New", Courier, monospace;
+ font-size: 0.75rem;
+ width: 100%;
+ outline: none;
+ }
+
+ /* تذييل الصفحة */
+ footer {
+ margin-top: 8px;
+ border-top: 1px solid #111;
+ padding-top: 6px;
  text-align: center;
- font-size: 0.65rem;
+ font-size: 0.6rem;
  color: var(--dos-amber);
  }
 
@@ -191,76 +255,129 @@
  <div class="dos-terminal">
  <div>
  <header>
- <h1>[ WASAN_SECURE_GATEWAY_v1.2 ]</h1>
+ <h1>[ WASAN_SECURE_GATEWAY_v1.3 ]</h1>
  <p>Enterprise Resource Planning Access Portal</p>
  </header>
 
  <div class="system-info">
- > System Type: Oracle EBS Portal<br>
- > Status: Secure & Connected [OK]<br>
- > Gregorian Date: <span id="currentDate"></span>
+ <div>SYS: Oracle EBS [OK]</div>
+ <div>SESSION: <span id="sessionTimer">00:00</span></div>
  </div>
 
- <!-- قائمة الأزرار ذات الأبعاد الموحدة والمضبوطة هندسياً --> <div class="actions-container">
- <!-- Main Login -->
- <div class="action-group">
+ <!-- 1. فلتر البحث السريع -->
+ <div class="search-box-container">
+ <input type="text" id="quickSearch" class="dos-search" placeholder="> Search service (e.g. salary, profile)..." onkeyup="filterButtons()">
+ </div>
+
+ <!-- قائمة الأزرار والروابط -->
+ <div class="actions-container" id="buttonsList">
+ <div class="action-group" data-name="main login login">
  <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" target="_blank" class="dos-btn">
- [ MAIN LOGIN ]
+ [ 1. MAIN LOGIN ]
  </a>
  </div>
 
- <!-- Query / Inquiry -->
- <div class="action-group">
+ <div class="action-group" data-name="query inquiry 23404">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404" target="_blank" class="dos-btn btn-query">
- [ QUERY / INQUIRY ]
+ [ 2. QUERY / INQUIRY ]
  </a>
  <div class="url-display">ID: 23404</div>
  </div>
 
- <!-- Personal Profile -->
- <div class="action-group">
+ <div class="action-group" data-name="personal profile 51648">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648" target="_blank" class="dos-btn btn-profile">
- [ PERSONAL PROFILE ]
+ [ 3. PERSONAL PROFILE ]
  </a>
  <div class="url-display">ID: 51648</div>
  </div>
 
- <!-- Historical Record -->
- <div class="action-group">
+ <div class="action-group" data-name="historical record history 23279">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279" target="_blank" class="dos-btn btn-history">
- [ HISTORICAL RECORD ]
+ [ 4. HISTORICAL RECORD ]
  </a>
  <div class="url-display">ID: 23279</div>
  </div>
 
- <!-- Leaves & Vacations -->
- <div class="action-group">
+ <div class="action-group" data-name="leaves vacations 47564">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564" target="_blank" class="dos-btn btn-leaves">
- [ LEAVES & VACATIONS ]
+ [ 5. LEAVES & VACATIONS ]
  </a>
  <div class="url-display">ID: 47564</div>
  </div>
 
- <!-- Salary Certificate -->
- <div class="action-group">
+ <div class="action-group" data-name="salary certificate 48913">
  <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913" target="_blank" class="dos-btn btn-salary">
- [ SALARY CERTIFICATE ]
+ [ 6. SALARY CERTIFICATE ]
  </a>
- <div class="url-display">ID: 48913 <span class="blink">_</span></div>
+ <div class="url-display">ID: 48913</div>
+ </div>
+ </div>
+
+ <!-- 2. سطر الأوامر التفاعلي CLI -->
+ <div class="cli-container">
+ <div class="cli-prompt-line">
+ <span class="cli-symbol">C:\Wasan></span>
+ <input type="text" id="cliInput" class="cli-input" placeholder="Type 1-6 or 'help' and press Enter..." onkeydown="handleCLI(event)">
  </div>
  </div>
  </div>
 
  <!-- تذييل وحقوق متجر وسن الرقمي -->
  <footer>
- C:\WASAN_DIGITAL_STORE> ALL RIGHTS RESERVED 2026 _
+ C:\WASAN_DIGITAL_STORE> ALL RIGHTS RESERVED 2026 <span class="blink">_</span>
  </footer>
  </div>
 
  <script>
- const now = new Date();
- const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
- document.getElementById('currentDate').innerText = now.toLocaleDateString('en-US', options);
+ // عداد زمني للجلسة
+ let seconds = 0;
+ setInterval(() => {
+ seconds++;
+ let m = Math.floor(seconds / 60).toString().padStart(2, '0');
+ let s = (seconds % 60).toString().padStart(2, '0');
+ document.getElementById('sessionTimer').innerText = `${m}:${s}`;
+ }, 1000);
+
+ // وظيفة البحث السريع وتصفية الأزرار function filterButtons() {
+ let query = document.getElementById('quickSearch').value.toLowerCase();
+ let groups = document.getElementsByClassName('action-group');
+ 
+ for (let i = 0; i < groups.length; i++) {
+ let name = groups[i].getAttribute('data-name');
+ if (name.includes(query)) {
+ groups[i].style.display = "flex";
+ } else {
+ groups[i].style.display = "none";
+ }
+ }
+ }
+
+ // سطر الأوامر التفاعلي CLI
+ function handleCLI(event) {
+ if (event.key === 'Enter') {
+ let val = document.getElementById('cliInput').value.trim().toLowerCase();
+ let links = [
+ "https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp",
+ "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404",
+ "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648",
+ "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279",
+ "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564",
+ "https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913"
+ ];
+
+ let index = parseInt(val) - 1;
+ if (index >= 0 && index < links.length) {
+ window.open(links[index], '_blank');
+ } else if (val === 'help') {
+ alert("Commands:\n1: Main Login\n2: Query\n3: Profile\n4: History\n5: Leaves\n6: Salary");
+ } else if (val === 'clear') {
+ document.getElementById('cliInput').value = '';
+ } else {
+ alert("Invalid command! Type numbers 1 to 6 or 'help'.");
+ }
+ document.getElementById('cliInput').value = '';
+ }
+ }
  </script>
 </body>
 </html>
