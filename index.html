@@ -3,7 +3,7 @@
 <head>
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Wasan DOS Gateway - Ultimate Edition v1.4</title>
+ <title>Wasan DOS Gateway - Clean Edition v1.5</title>
  <style>
  :root {
  --dos-bg: #000000;
@@ -37,18 +37,13 @@
  width: 100%;
  border: 2px solid var(--dos-border);
  background-color: #050505;
- padding: 15px;
+ padding: 18px 15px;
  box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
  position: relative;
  border-radius: 4px;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
- transition: background 0.1s;
- }
-
- /* تأثير فلاش شاشة الـ DOS عند تنفيذ الأوامر */ .flash {
- background-color: #003300 !important;
  }
 
  /* تأثير خطوط الشاشة القديمة CRT */ .dos-terminal::before {
@@ -65,33 +60,33 @@
 
  header {
  text-align: center;
- margin-bottom: 10px;
+ margin-bottom: 12px;
  border-bottom: 1px dashed var(--dos-dim-green);
- padding-bottom: 6px;
+ padding-bottom: 8px;
  }
 
  header h1 {
- font-size: 0.95rem;
+ font-size: 1rem;
  color: var(--dos-amber);
- margin-bottom: 2px;
+ margin-bottom: 3px;
  text-transform: uppercase;
  letter-spacing: 1px;
  }
 
  header p {
- font-size: 0.65rem;
+ font-size: 0.7rem;
  color: var(--dos-green);
  }
 
  .system-info {
- font-size: 0.6rem;
+ font-size: 0.65rem;
  color: var(--dos-dim-green);
- margin-bottom: 8px;
- line-height: 1.3;
+ margin-bottom: 12px;
+ line-height: 1.4;
  display: flex;
  justify-content: space-between;
  border-bottom: 1px dashed #111;
- padding-bottom: 4px;
+ padding-bottom: 6px;
  }
 
  .system-info span {
@@ -100,7 +95,7 @@
 
  /* شريط البحث السريع */
  .search-box-container {
- margin-bottom: 8px;
+ margin-bottom: 12px;
  z-index: 20;
  position: relative;
  }
@@ -110,9 +105,9 @@
  background-color: #000;
  border: 1px solid var(--dos-dim-green);
  color: var(--dos-green);
- padding: 6px 10px;
+ padding: 9px 12px;
  font-family: "Courier New", Courier, monospace;
- font-size: 0.75rem;
+ font-size: 0.8rem;
  outline: none;
  border-radius: 2px;
  }
@@ -122,14 +117,14 @@
  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
  }
 
- /* قائمة الأزرار مع التمرير وضبط الانضباط الهندسي */ .actions-container {
+ /* قائمة الأزرار المباشرة ذات الأبعاد الموحدة */ .actions-container {
  display: flex;
  flex-direction: column;
- gap: 10px;
- margin: 4px 0;
+ gap: 12px;
+ margin: 5px 0;
  z-index: 20;
  position: relative;
- max-height: 38vh;
+ max-height: 48vh;
  overflow-y: auto;
  padding: 2px;
  }
@@ -142,8 +137,8 @@
  background-color: var(--dos-bg);
  color: var(--dos-green);
  border: 2px solid var(--dos-green);
- padding: 9px 10px;
- font-size: 0.8rem;
+ padding: 11px 12px;
+ font-size: 0.85rem;
  font-weight: bold;
  font-family: "Courier New", Courier, monospace;
  cursor: pointer;
@@ -163,7 +158,8 @@
  box-shadow: 0 0 12px var(--dos-green);
  }
 
- /* تخصيص ألوان الأزرار المتباينة */ .btn-query { color: var(--dos-amber); border-color: var(--dos-amber); }
+ /* ألوان الأزرار المتباينة */
+ .btn-query { color: var(--dos-amber); border-color: var(--dos-amber); }
  .btn-query:hover { background-color: var(--dos-amber); color: var(--dos-bg); }
 
  .btn-profile { color: var(--dos-cyan); border-color: var(--dos-cyan); }
@@ -179,80 +175,20 @@
  .btn-salary:hover { background-color: #ffff00; color: var(--dos-bg); }
 
  .url-display {
- font-size: 0.55rem;
+ font-size: 0.6rem;
  color: var(--dos-dim-green);
- margin-top: 2px;
+ margin-top: 3px;
  text-align: center;
  width: 100%;
- }
-
- /* سطر الأوامر التفاعلي المتقدم CLI */
- .cli-container {
- margin-top: 8px;
- border-top: 1px dashed var(--dos-dim-green);
- padding-top: 6px;
- z-index: 20;
- position: relative;
- }
-
- .cli-prompt-line {
- display: flex;
- align-items: center;
- font-size: 0.7rem;
- background: #000;
- border: 1px solid var(--dos-dim-green);
- padding: 5px 8px;
- border-radius: 2px;
- margin-bottom: 5px;
- }
-
- .cli-symbol {
- color: var(--dos-amber);
- margin-right: 6px;
- font-weight: bold;
- }
-
- .cli-input {
- background: transparent;
- border: none;
- color: var(--dos-green);
- font-family: "Courier New", Courier, monospace;
- font-size: 0.7rem;
- width: 100%;
- outline: none;
- }
-
- /* أزرار اختصار سريعة لمساعدة الجوال */ .quick-pills {
- display: flex;
- gap: 4px;
- justify-content: center;
- flex-wrap: wrap;
- margin-bottom: 4px;
- }
-
- .pill {
- background: #001100;
- color: var(--dos-amber);
- border: 1px solid var(--dos-dim-green);
- padding: 2px 6px;
- font-size: 0.6rem;
- cursor: pointer;
- border-radius: 2px;
- font-family: "Courier New", Courier, monospace;
- }
-
- .pill:hover {
- background: var(--dos-amber);
- color: #000;
  }
 
  /* تذييل الصفحة */
  footer {
- margin-top: 6px;
- border-top: 1px solid #111;
- padding-top: 4px;
+ margin-top: 12px;
+ border-top: 1px dashed var(--dos-dim-green);
+ padding-top: 8px;
  text-align: center;
- font-size: 0.55rem;
+ font-size: 0.65rem;
  color: var(--dos-amber);
  }
 
@@ -275,10 +211,10 @@
 </head>
 <body>
 
- <div class="dos-terminal" id="mainTerminal">
+ <div class="dos-terminal">
  <div>
  <header>
- <h1>[ WASAN_SECURE_GATEWAY_v1.4 ]</h1>
+ <h1>[ WASAN_SECURE_GATEWAY_v1.5 ]</h1>
  <p>Enterprise Resource Planning Access Portal</p>
  </header>
 
@@ -292,68 +228,51 @@
  <input type="text" id="quickSearch" class="dos-search" placeholder="> Search service (e.g. salary, profile)..." onkeyup="filterButtons()">
  </div>
 
- <!-- قائمة الأزرار والروابط المنضبطة مع معرفات برمجية --> <div class="actions-container" id="buttonsList">
- <div class="action-group" data-name="main login login 1">
- <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" target="_blank" class="dos-btn" id="linkBtn1">
- [ 1. MAIN LOGIN ]
+ <!-- قائمة الأزرار المباشرة (تفتح الآن في نفس التبويب لتسهيل الرجوع) --> <div class="actions-container" id="buttonsList">
+ <div class="action-group" data-name="main login login">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" class="dos-btn">
+ [ MAIN LOGIN ]
  </a>
  </div>
 
- <div class="action-group" data-name="query inquiry 23404 2">
- <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404" target="_blank" class="dos-btn btn-query" id="linkBtn2">
- [ 2. QUERY / INQUIRY ]
+ <div class="action-group" data-name="query inquiry 23404">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404" class="dos-btn btn-query">
+ [ QUERY / INQUIRY ]
  </a>
  <div class="url-display">ID: 23404</div>
  </div>
 
- <div class="action-group" data-name="personal profile 51648 3">
- <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648" target="_blank" class="dos-btn btn-profile" id="linkBtn3">
- [ 3. PERSONAL PROFILE ]
+ <div class="action-group" data-name="personal profile 51648">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648" class="dos-btn btn-profile">
+ [ PERSONAL PROFILE ]
  </a>
  <div class="url-display">ID: 51648</div>
  </div>
 
- <div class="action-group" data-name="historical record history 23279 4">
- <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279" target="_blank" class="dos-btn btn-history" id="linkBtn4">
- [ 4. HISTORICAL RECORD ]
+ <div class="action-group" data-name="historical record history 23279">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279" class="dos-btn btn-history">
+ [ HISTORICAL RECORD ]
  </a>
  <div class="url-display">ID: 23279</div>
  </div>
 
- <div class="action-group" data-name="leaves vacations 47564 5">
- <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564" target="_blank" class="dos-btn btn-leaves" id="linkBtn5">
- [ 5. LEAVES & VACATIONS ]
+ <div class="action-group" data-name="leaves vacations 47564">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564" class="dos-btn btn-leaves">
+ [ LEAVES & VACATIONS ]
  </a>
  <div class="url-display">ID: 47564</div>
  </div>
 
- <div class="action-group" data-name="salary certificate 48913 6">
- <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913" target="_blank" class="dos-btn btn-salary" id="linkBtn6">
- [ 6. SALARY CERTIFICATE ]
+ <div class="action-group" data-name="salary certificate 48913">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913" class="dos-btn btn-salary">
+ [ SALARY CERTIFICATE ]
  </a>
  <div class="url-display">ID: 48913</div>
  </div>
  </div>
-
- <!-- سطر الأوامر التفاعلي المتقدم CLI -->
- <div class="cli-container">
- <!-- أزرار سريعة للأوامر (تساعد جداً على الجوال) -->
- <div class="quick-pills">
- <span class="pill" onclick="executeCommand('1')">[1] Login</span>
- <span class="pill" onclick="executeCommand('2')">[2] Query</span>
- <span class="pill" onclick="executeCommand('3')">[3] Profile</span>
- <span class="pill" onclick="executeCommand('4')">[4] History</span>
- <span class="pill" onclick="executeCommand('5')">[5] Leaves</span>
- <span class="pill" onclick="executeCommand('6')">[6] Salary</span>
- </div>
- <div class="cli-prompt-line">
- <span class="cli-symbol">C:\Wasan></span>
- <input type="text" id="cliInput" class="cli-input" placeholder="Type 1-6 or 'help' and press Enter..." autocomplete="off">
- </div>
- </div>
  </div>
 
- <!-- تذييل وحقوق متجر وسن الرقمي -->
+ <!-- تذييل الصفحة -->
  <footer>
  C:\WASAN_DIGITAL_STORE> ALL RIGHTS RESERVED 2026 <span class="blink">_</span>
  </footer>
@@ -369,7 +288,7 @@
  document.getElementById('sessionTimer').innerText = `${m}:${s}`;
  }, 1000);
 
- // وظيفة البحث السريع وتصفية الأزرار function filterButtons() {
+ // وظيفة البحث السريع function filterButtons() {
  let query = document.getElementById('quickSearch').value.toLowerCase();
  let groups = document.getElementsByClassName('action-group');
  
@@ -382,38 +301,6 @@
  }
  }
  }
-
- // تنفيذ الأوامر عبر محاكاة النقر الفعلي (الحل الجذري لتجاوز حظر المتصفحات) function executeCommand(val) {
- val = val.trim().toLowerCase();
- let terminal = document.getElementById('mainTerminal');
- 
- // تأثير فلاش الشاشة البصري
- terminal.classList.add('flash');
- setTimeout(() => terminal.classList.remove('flash'), 150);
-
- if (val >= '1' && val <= '6') {
- let btn = document.getElementById('linkBtn' + val);
- if (btn) { btn.click(); // محاكاة ضغطة فأرة حقيقية تفتح الرابط فوراً وبدون حظر }
- } else if (val === 'help') {
- alert("Wasan DOS Gateway Commands:\n[1] Main Login\n[2] Query / Inquiry\n[3] Personal Profile\n[4] Historical Record\n[5] Leaves & Vacations\n[6] Salary Certificate\n\nType 'clear' to reset.");
- } else if (val === 'clear' || val === 'cls') {
- document.getElementById('cliInput').value = '';
- document.getElementById('quickSearch').value = '';
- filterButtons();
- } else {
- alert("Unknown command! Type a number from 1 to 6 or 'help'.");
- }
- }
-
- // ربط سطر الأوامر بمفتاح Enter
- document.getElementById('cliInput').addEventListener('keydown', function(event) {
- if (event.key === 'Enter') {
- event.preventDefault();
- let val = this.value;
- executeCommand(val);
- this.value = '';
- }
- });
  </script>
 </body>
 </html>
