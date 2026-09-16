@@ -117,24 +117,20 @@
  box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
  }
 
- /* قائمة الأزرار مع التمرير */
- .actions-container {
+ /* قائمة الأزرار مع التمرير وضبط الانضباط الهندسي */ .actions-container {
  display: flex;
  flex-direction: column;
- gap: 10px;
+ gap: 12px;
  margin: 5px 0;
  z-index: 20;
  position: relative;
- max-height: 40vh;
+ max-height: 42vh;
  overflow-y: auto;
  padding: 2px;
  }
 
  .action-group {
  width: 100%;
- display: flex;
- flex-direction: column;
- align-items: center;
  }
 
  .dos-btn {
@@ -154,9 +150,6 @@
  width: 100%;
  display: block;
  text-align: center;
- white-space: nowrap;
- overflow: hidden;
- text-overflow: ellipsis;
  }
 
  .dos-btn:hover {
@@ -183,7 +176,7 @@
  .url-display {
  font-size: 0.6rem;
  color: var(--dos-dim-green);
- margin-top: 2px;
+ margin-top: 3px;
  text-align: center;
  width: 100%;
  }
@@ -264,12 +257,12 @@
  <div>SESSION: <span id="sessionTimer">00:00</span></div>
  </div>
 
- <!-- 1. فلتر البحث السريع -->
+ <!-- فلتر البحث السريع -->
  <div class="search-box-container">
  <input type="text" id="quickSearch" class="dos-search" placeholder="> Search service (e.g. salary, profile)..." onkeyup="filterButtons()">
  </div>
 
- <!-- قائمة الأزرار والروابط -->
+ <!-- قائمة الأزرار والروابط المنضبطة -->
  <div class="actions-container" id="buttonsList">
  <div class="action-group" data-name="main login login">
  <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" target="_blank" class="dos-btn">
@@ -313,7 +306,7 @@
  </div>
  </div>
 
- <!-- 2. سطر الأوامر التفاعلي CLI -->
+ <!-- سطر الأوامر التفاعلي CLI -->
  <div class="cli-container">
  <div class="cli-prompt-line">
  <span class="cli-symbol">C:\Wasan></span>
@@ -345,7 +338,7 @@
  for (let i = 0; i < groups.length; i++) {
  let name = groups[i].getAttribute('data-name');
  if (name.includes(query)) {
- groups[i].style.display = "flex";
+ groups[i].style.display = "block";
  } else {
  groups[i].style.display = "none";
  }
