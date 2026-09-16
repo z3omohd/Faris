@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Wasan DOS Gateway - Secure Enterprise Portal</title>
+ <style>
+ :root {
+ --dos-bg: #000000;
+ --dos-green: #00ff00;
+ --dos-dim-green: #008800;
+ --dos-amber: #ffb000;
+ --dos-cyan: #00ffff;
+ --dos-magenta: #ff00ff;
+ --dos-orange: #ff5500;
+ --dos-border: #00ff00;
+ }
+
+ * {
+ box-sizing: border-box;
+ margin: 0;
+ padding: 0;
+ font-family: "Courier New", Courier, monospace;
+ }
+
+ body {
+ background-color: var(--dos-bg);
+ color: var(--dos-green);
+ min-height: 100vh;
+ display: flex;
+ justify-content: center;
+ align-items: stretch;
+ padding: 10px;
+ }
+
+ .dos-terminal {
+ width: 100%;
+ border: 2px solid var(--dos-border);
+ background-color: #050505;
+ padding: 20px 15px;
+ box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+ position: relative;
+ border-radius: 4px;
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ }
+
+ /* تأثير خطوط الشاشة القديمة CRT */ .dos-terminal::before {
+ content: " ";
+ display: block;
+ position: absolute;
+ top: 0; left: 0; bottom: 0; right: 0;
+ background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+ background-size: 100% 4px;
+ z-index: 10;
+ pointer-events: none;
+ opacity: 0.6;
+ }
+
+ header {
+ text-align: center;
+ margin-bottom: 18px;
+ border-bottom: 1px dashed var(--dos-dim-green);
+ padding-bottom: 10px;
+ }
+
+ header h1 {
+ font-size: 1.05rem;
+ color: var(--dos-amber);
+ margin-bottom: 4px;
+ text-transform: uppercase;
+ letter-spacing: 1px;
+ }
+
+ header p {
+ font-size: 0.75rem;
+ color: var(--dos-green);
+ }
+
+ .system-info {
+ font-size: 0.7rem;
+ color: var(--dos-dim-green);
+ margin-bottom: 15px;
+ line-height: 1.5;
+ }
+
+ .system-info span {
+ color: var(--dos-green);
+ }
+
+ /* حاوية الأزرار مع ضمان توحيد عرض العناصر بالكامل */ .actions-container {
+ display: flex;
+ flex-direction: column;
+ gap: 14px;
+ margin: 10px 0;
+ z-index: 20;
+ position: relative;
+ max-height: 52vh;
+ overflow-y: auto;
+ padding: 4px;
+ }
+
+ .action-group {
+ width: 100%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ }
+
+ .dos-btn {
+ background-color: var(--dos-bg);
+ color: var(--dos-green);
+ border: 2px solid var(--dos-green);
+ padding: 12px 15px;
+ font-size: 0.9rem;
+ font-weight: bold;
+ font-family: "Courier New", Courier, monospace;
+ cursor: pointer;
+ text-decoration: none;
+ text-transform: uppercase;
+ letter-spacing: 0.5px;
+ box-shadow: 0 0 8px rgba(0, 255, 0, 0.15);
+ transition: all 0.2s ease-in-out;
+ width: 100%;
+ display: block;
+ text-align: center;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ }
+
+ .dos-btn:hover {
+ background-color: var(--dos-green);
+ color: var(--dos-bg);
+ box-shadow: 0 0 15px var(--dos-green);
+ }
+
+ /* تخصيص ألوان الأزرار المتباينة بنسق هندسي ثابت */ .btn-query { color: var(--dos-amber); border-color: var(--dos-amber); }
+ .btn-query:hover { background-color: var(--dos-amber); color: var(--dos-bg); }
+
+ .btn-profile { color: var(--dos-cyan); border-color: var(--dos-cyan); }
+ .btn-profile:hover { background-color: var(--dos-cyan); color: var(--dos-bg); }
+
+ .btn-history { color: var(--dos-magenta); border-color: var(--dos-magenta); }
+ .btn-history:hover { background-color: var(--dos-magenta); color: var(--dos-bg); }
+
+ .btn-leaves { color: var(--dos-orange); border-color: var(--dos-orange); }
+ .btn-leaves:hover { background-color: var(--dos-orange); color: var(--dos-bg); }
+
+ .btn-salary { color: #ffff00; border-color: #ffff00; }
+ .btn-salary:hover { background-color: #ffff00; color: var(--dos-bg); }
+
+ .url-display {
+ font-size: 0.65rem;
+ color: var(--dos-dim-green);
+ margin-top: 4px;
+ text-align: center;
+ width: 100%;
+ }
+
+ /* تذييل الصفحة */
+ footer {
+ margin-top: 15px;
+ border-top: 1px dashed var(--dos-dim-green);
+ padding-top: 8px;
+ text-align: center;
+ font-size: 0.65rem;
+ color: var(--dos-amber);
+ }
+
+ .blink {
+ animation: blink-animation 1s steps(2, start) infinite;
+ }
+
+ @keyframes blink-animation {
+ to { visibility: hidden; }
+ }
+
+ ::-webkit-scrollbar {
+ width: 3px;
+ }
+ ::-webkit-scrollbar-thumb {
+ background: var(--dos-dim-green);
+ border-radius: 2px;
+ }
+ </style>
+</head>
+<body>
+
+ <div class="dos-terminal">
+ <div>
+ <header>
+ <h1>[ WASAN_SECURE_GATEWAY_v1.2 ]</h1>
+ <p>Enterprise Resource Planning Access Portal</p>
+ </header>
+
+ <div class="system-info">
+ > System Type: Oracle EBS Portal<br>
+ > Status: Secure & Connected [OK]<br>
+ > Gregorian Date: <span id="currentDate"></span>
+ </div>
+
+ <!-- قائمة الأزرار ذات الأبعاد الموحدة والمضبوطة هندسياً --> <div class="actions-container">
+ <!-- Main Login -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/AppsLocalLogin.jsp" target="_blank" class="dos-btn">
+ [ MAIN LOGIN ]
+ </a>
+ </div>
+
+ <!-- Query / Inquiry -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23404" target="_blank" class="dos-btn btn-query">
+ [ QUERY / INQUIRY ]
+ </a>
+ <div class="url-display">ID: 23404</div>
+ </div>
+
+ <!-- Personal Profile -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=51648" target="_blank" class="dos-btn btn-profile">
+ [ PERSONAL PROFILE ]
+ </a>
+ <div class="url-display">ID: 51648</div>
+ </div>
+
+ <!-- Historical Record -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=23279" target="_blank" class="dos-btn btn-history">
+ [ HISTORICAL RECORD ]
+ </a>
+ <div class="url-display">ID: 23279</div>
+ </div>
+
+ <!-- Leaves & Vacations -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=47564" target="_blank" class="dos-btn btn-leaves">
+ [ LEAVES & VACATIONS ]
+ </a>
+ <div class="url-display">ID: 47564</div>
+ </div>
+
+ <!-- Salary Certificate -->
+ <div class="action-group">
+ <a href="https://sshr.moe.gov.sa/OA_HTML/RF.jsp?function_id=48913" target="_blank" class="dos-btn btn-salary">
+ [ SALARY CERTIFICATE ]
+ </a>
+ <div class="url-display">ID: 48913 <span class="blink">_</span></div>
+ </div>
+ </div>
+ </div>
+
+ <!-- تذييل وحقوق متجر وسن الرقمي -->
+ <footer>
+ C:\WASAN_DIGITAL_STORE> ALL RIGHTS RESERVED 2026 _
+ </footer>
+ </div>
+
+ <script>
+ const now = new Date();
+ const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
+ document.getElementById('currentDate').innerText = now.toLocaleDateString('en-US', options);
+ </script>
+</body>
+</html>
